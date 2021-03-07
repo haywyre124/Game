@@ -1,21 +1,20 @@
-var $container = document.getElementById('container');
+var cUtils = require('./utils/utils.canvas.js'),
+      $container = document.getElementById('container');
 
-function Game() {
-  this.viewport = document.createElement('canvas');
-  this.context = viewport.getContext('2d');
+function Game(w, h) {
+  this.viewport = cUtils.generateCanvas(w, h);
+  this.viewport.id = "gameViewport";
   
-  this.viewport.width = 800;
-  this.viewport.height = 600;
-  
-  $container.insertBefore(this.viewport, $container.firstChild);
-  //random txt
-  this.context.font = '32px arial';
-  this.context.fillText('I\'m Feeling lucky', 5, 50, 800);
+  //get and store canvas context as a global
+  this.context = this.viewportgetContext('2d');
+  $container.insertBefore(this.viewport, $container.firstChild)
+  //text, once again
+  this.context.font = '32px Arial';
+  this.context.fillStyle = '#fff';
+  this.context.fillText = ('I\'m feeling lucky!', 5, 50);
   
   return this;
 }
-//instantiate the game in global
-windwo.game = new Game()
 
-//export the game as a module
-module.exports = game();
+window.game = new Game(800,600);
+module.exports = game;
